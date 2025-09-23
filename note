@@ -1,0 +1,16 @@
+
+//Push
+                     
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/AbhijitMadane27144/Project_Evershop.git
+git push -u origin main
+
+
+//Updation note
+
+git add .
+git commit -m "Your message"
+git push

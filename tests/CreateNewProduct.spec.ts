@@ -66,10 +66,7 @@ test("Login and Select file ", async ({page}) => {
 
     })
 
-    test("Login and Select file1 ", async ({}) => {
-
-    })
-
+    
 })
 
 
