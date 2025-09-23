@@ -2,7 +2,7 @@ import { test, expect ,} from '@playwright/test';
 import { ENV } from "./utils/env";
 import testData from "./data/testData.json";
 import { getLocator, applocators } from "./locators/subscription.locator";
-import {testfixture} from "../fixtures/login";
+//import {testfixture} from "../fixtures/login";
 
 
 
@@ -57,7 +57,7 @@ test("Login and Select file ", async ({page}) => {
 
 
     await page.getByRole('button', { name: 'Save' }).click();
-    await testfixture
+    //await testfixture
 
 
     page.on('dialog', async dialog=>{
