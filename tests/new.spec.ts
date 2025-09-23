@@ -36,7 +36,7 @@ await page.locator('select[name="attributes[1][value]"]').selectOption({ label: 
 
 });
 
-test.only("Login page ", async ({ page }) => {
+test("Login page ", async ({ page }) => {
 
     await page.goto(ENV.adminURL);
 
