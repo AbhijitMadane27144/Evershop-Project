@@ -1,9 +1,10 @@
-import { test } from "@playwright/test"
+//import { test } from "@playwright/test"
+import { test } from "../fixtures/POMfixture"
 import { ENV } from "./utils/env";
 import { generateRandomCoupen, generateRandomEmail } from "./utils/helper";
 import { SignUpPage } from "../Page/SignUpPage";
 import testData from "../tests/data/testData.json";
-import { AdminPage } from "../Page/AdminLogin";
+//import { AdminPage } from "../Page/AdminLogin";
 import { CoupenPage1 } from "../Page/CoupenPage1";
 import { AdminProductPage } from "../Page/CreateProductPage";
 
@@ -23,41 +24,42 @@ test.describe("Subscription Flow POM Demo", () => {
     });
 
     // Admin Login
-    test("Admin Login", async ({ page }) => {
+    test("Admin Login", async ({ page, AdminLogin }) => {
 
-        const adminpage = new AdminPage(page);
-        await adminpage.navigate(ENV.adminURL);
+        //const adminpage = new AdminPage(page);
+        await AdminLogin.navigate(ENV.adminURL);
 
-        await adminpage.loginAsAdmin(testData.admin.email,
+        await AdminLogin.loginAsAdmin(testData.admin.email,
             testData.admin.password)
 
     });
 
-    test("New Coupen Creation Page", async ({ page }) => {
+    test("New Coupen Creation Page", async ({ page, AdminLogin }) => {
 
-      const randomCoupen = generateRandomCoupen(testData.CoupenData.Code);
+        const randomCoupen = generateRandomCoupen(testData.CoupenData.Code);
 
-        const adminpage = new AdminPage(page);
-        await adminpage.navigate(ENV.adminURL);
+        //const adminpage = new AdminPage(page);
+        await AdminLogin.navigate(ENV.adminURL);
 
-        await adminpage.loginAsAdmin(testData.admin.email,
+        await AdminLogin.loginAsAdmin(testData.admin.email,
             testData.admin.password)
 
         const couponpage = new CoupenPage1(page);
-        await couponpage.createCoupon(randomCoupen, 
-        testData.CoupenData.Description, 
-        testData.CoupenData.amount,
-        testData.CoupenData.StartDate,
-        testData.CoupenData.EndDate,
-        testData.CoupenData.minpurchaseamount,
-        testData.CoupenData.minpurchaseqty);
+        await couponpage.createCoupon(randomCoupen,
+            testData.CoupenData.Description,
+            testData.CoupenData.amount,
+            testData.CoupenData.StartDate,
+            testData.CoupenData.EndDate,
+            testData.CoupenData.minpurchaseamount,
+            testData.CoupenData.minpurchaseqty);
 
     })
 
-    test("New Product Creation Page", async ({ page }) => {
+    test("New Product Creation Page", async ({ page, AdminLogin }) => {
+        await AdminLogin.navigate(ENV.adminURL);
+        await AdminLogin.loginAsAdmin(testData.admin.email,
+        testData.admin.password)
         const productPage = new AdminProductPage(page);
-        await productPage.navigate(ENV.adminURL);
-        productPage.login(testData.admin.email, testData.admin.password);
         await productPage.openNewProductForm();
         await productPage.fillProductDetails(testData.ProductData.Name,
             testData.ProductData.SKU,
