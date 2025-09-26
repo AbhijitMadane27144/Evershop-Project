@@ -10,7 +10,16 @@ import testData from "../tests/data/testData.json";
 
 
 test.describe("Subscription Flow POM Demo", () => {
-    test("Signup form new user creation", async ({ page,signupPage }) => {
+
+    /*test.beforeEach(async ({ page, AdminLogin }) => {
+        await AdminLogin.navigate(ENV.adminURL);
+
+        await AdminLogin.loginAsAdmin(testData.admin.email,
+            testData.admin.password)
+
+    })*/
+
+    test("Signup form new user creation", async ({ page, signupPage }) => {
         //const signupPage = new SignUpPage(page);
         const randomEmail = generateRandomEmail(testData.user.email);
 
@@ -23,24 +32,24 @@ test.describe("Subscription Flow POM Demo", () => {
             testData.user.password);
     });
 
-    // Admin Login
-    test("Admin Login", async ({ page, AdminLogin }) => {
+     // Admin Login
+     test("Admin Login", async ({ page, AdminLogin }) => {
+ 
+         //const adminpage = new AdminPage(page);
+         await AdminLogin.navigate(ENV.adminURL);
+ 
+         await AdminLogin.loginAsAdmin(testData.admin.email,
+             testData.admin.password)
+ 
+     });
 
-        //const adminpage = new AdminPage(page);
-        await AdminLogin.navigate(ENV.adminURL);
-
-        await AdminLogin.loginAsAdmin(testData.admin.email,
-            testData.admin.password)
-
-    });
-
-    test("New Coupen Creation Page", async ({ page, AdminLogin,coupenpage }) => {
+    test("New Coupen Creation Page", async ({ page, AdminLogin, coupenpage }) => {
 
         const randomCoupen = generateRandomCoupen(testData.CoupenData.Code);
 
         //const adminpage = new AdminPage(page);
         await AdminLogin.navigate(ENV.adminURL);
-       await AdminLogin.loginAsAdmin(testData.admin.email,
+        await AdminLogin.loginAsAdmin(testData.admin.email,
             testData.admin.password)
 
         //const couponpage = new CoupenPage1(page);
@@ -54,10 +63,10 @@ test.describe("Subscription Flow POM Demo", () => {
 
     })
 
-    test("New Product Creation Page", async ({ page, AdminLogin,CreateProduct }) => {
+    test("New Product Creation Page", async ({ page, AdminLogin, CreateProduct }) => {
         await AdminLogin.navigate(ENV.adminURL);
         await AdminLogin.loginAsAdmin(testData.admin.email,
-        testData.admin.password)
+            testData.admin.password)
         //const productPage = new AdminProductPage(page);
         await CreateProduct.openNewProductForm();
         await CreateProduct.fillProductDetails(testData.ProductData.Name,

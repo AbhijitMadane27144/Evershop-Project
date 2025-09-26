@@ -1,21 +1,19 @@
-import {test} from "../fixtures/fixture1"
+import {test} from "../fixtures/hooksfixture"
 import {  expect ,} from '@playwright/test';
 import { ENV } from "./utils/env";
 import testData from "./data/testData.json";
 import { getLocator, applocators } from "./locators/subscription.locator";
-//import {testfixture} from "../fixtures/login";
 
 
 
-test("Login and Select file ", async ({page,fixtur1,workerfixture}) => {
+test("Login and Select file ", async ({page,loginlogoutfixture}) => {
 
-    await page.goto(ENV.adminURL);
 
-    await getLocator(page, applocators.adminEmailInput).fill(testData.admin.email);
-    await getLocator(page, applocators.adminPasswordInput).fill(testData.admin.password);
-    await page.getByRole('button', { name: 'SIGN IN' }).click();
-    await console.log(fixtur1);
-    await console.log(workerfixture)
+    /*await loginlogoutfixture.goto(ENV.adminURL);
+
+    await getLocator(page, loginlogoutfixture.adminEmailInput).fill(testData.admin.email);
+    await getLocator(page, loginlogoutfixture.adminPasswordInput).fill(testData.admin.password);
+    await page.getByRole('button', { name: 'SIGN IN' }).click();*/
 
     await page.getByRole('link', { name: 'Products', exact: true }).click();
     await page.locator('div').filter({ hasText: /^New Product$/ }).getByRole('link').click();
